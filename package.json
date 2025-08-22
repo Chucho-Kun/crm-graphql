@@ -1,0 +1,19 @@
+{
+  "name": "crmgraphql",
+  "version": "1.0.0",
+  "description": "Plataforma CRM con GraphQL",
+  "license": "ISC",
+  "author": "Jesus Peralta",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "dependencies": {
+    "apollo-server": "^3.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
