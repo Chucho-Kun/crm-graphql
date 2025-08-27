@@ -95,6 +95,55 @@ const resolvers = {
         obtenerPedidosEstado: async ( _, { estado }, ctx ) => {
             const pedidos = await Pedido.find({ vendedor: ctx.usuario.id , estado });
             return pedidos;
+        },
+        mejoresClientes: async () => {
+            const clientes = await Pedido.aggregate([
+                { $match : { estado : "COMPLETADO" }},
+                { $group : {
+                    _id: "$cliente",
+                    total: { $sum: '$total' }
+                }},
+                {
+                    $lookup:{
+                        from: 'clientes',
+                        localField: '_id',
+                        foreignField: '_id',
+                        as: 'cliente'
+                    }
+                },{
+                    $sort: { total : -1 }
+                }
+            ]);
+
+            return clientes;
+        },
+        mejoresVendedores: async () => {
+            const vendedores = await Pedido.aggregate([
+                { $match: { estado: "COMPLETADO" }},
+                { $group: {
+                    _id: "$vendedor",
+                    total: { $sum : '$total'}
+                } },
+                {
+                    $lookup:{
+                        from: 'usuarios',
+                        localField: '_id',
+                        foreignField: '_id',
+                        as: 'vendedor'
+                    }
+                },
+                {
+                    $limit: 5
+                },{
+                    $sort: { total: -1 }
+                }
+            ]);
+
+            return vendedores;
+        },
+        buscarProducto: async ( _, { texto }) => {
+            const productos = await Producto.find({ $text: { $search: texto } }).limit(10)
+            return productos;
         }
     },
     Mutation: {
