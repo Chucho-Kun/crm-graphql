@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config({ path: '.env'})
 
 const crearToken = ( usuario , secret , expiresIn ) => {    
-    const { id , email , nombre , apellido } = usuario
+    const { id } = usuario
     return jwt.sign( { id } , secret , {expiresIn} )
 }
 
@@ -152,7 +152,7 @@ const resolvers = {
             //Revisar si el usuario ya está registrado
             const existeUsuario = await Usuario.findOne({email});
             if(existeUsuario){
-                throw new Error('El usuario ya existe en la base de datos')
+                throw new Error( `El correo ${ email } ya fue usado por otro usuario`)
             }
             //Hashear password
             const salt = bcryptjs.genSaltSync(10);
