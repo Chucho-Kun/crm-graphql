@@ -160,7 +160,8 @@ const typeDefs = gql`
 module.exports = typeDefs
 ```
 ### db/resolver.js
-```const Usuario = require('../models/Usuarios')
+```
+const Usuario = require('../models/Usuarios')
 const Producto = require('../models/Producto')
 const Cliente = require('../models/Cliente')
 const Pedido = require('../models/Pedido')
@@ -314,7 +315,7 @@ const resolvers = {
             //Revisar si el usuario ya está registrado
             const existeUsuario = await Usuario.findOne({email});
             if(existeUsuario){
-                throw new Error('El usuario ya existe en la base de datos')
+                throw new Error( `El correo ${ email } ya fue usado por otro usuario`)
             }
             //Hashear password
             const salt = bcryptjs.genSaltSync(10);
