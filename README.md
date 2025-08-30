@@ -1,7 +1,7 @@
 # FullStack Platform GraphQL NEXT / REACT / TypeScript
 ## Server
 ## Technologies
-Next + React + Typescript + TailwindCSS + Zod + Zustand + Prisma + Cloudinary
+Node + Javascript + ApolloServer + Mongoose + Dotenv + Bcrypt + JsonWebToken
 ## Developer Notes
 
 ### Basic structure of GraphQL 
@@ -513,7 +513,7 @@ const resolvers = {
 module.exports = resolvers; 
 ```
 
-#### Deploying project
+#### Run project in local
 ```
 npm run dev
 ```
