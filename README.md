@@ -1,5 +1,5 @@
 # FullStack Platform GraphQL NEXT / REACT / TypeScript
-
+## Server
 ## Technologies
 Next + React + Typescript + TailwindCSS + Zod + Zustand + Prisma + Cloudinary
 ## Developer Notes
