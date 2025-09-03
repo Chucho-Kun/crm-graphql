@@ -7,15 +7,14 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config({ path: '.env'})
 
 const crearToken = ( usuario , secret , expiresIn ) => {    
-    const { id } = usuario
-    return jwt.sign( { id } , secret , {expiresIn} )
+    const { id , nombre , apellido } = usuario
+    return jwt.sign( { id , nombre , apellido } , secret , {expiresIn} )
 }
 
 const resolvers = {
     Query:{
-        obtenerUsuario: async (_, { token }) => {
-            const usuarioId = await jwt.verify( token , process.env.SECRET_WORD )
-            return usuarioId
+        obtenerUsuario: async (_, {} , ctx ) => {
+            return ctx.usuario;
         },
         obtenerProductos: async () => {
             try {
@@ -172,6 +171,9 @@ const resolvers = {
             const { email , password } = input 
             // Revisar si ya existe el usuario
             const existeUsuario = await Usuario.findOne({email})
+
+            console.log({existeUsuario});
+            
             if(!existeUsuario){
                 throw new Error('El usuario no existe')
             }
@@ -259,10 +261,12 @@ const resolvers = {
             if(!cliente){
                 throw new Error('No se encontró al cliente')
             }
+
             //verificar quien trata de eliminarlo
             if(cliente.vendedor.toString() !== ctx.usuario.id){
                 throw new Error('Error en las credenciales');
             }
+
             //eliminar cliente
             await Cliente.findOneAndDelete( {_id: id} )
             return "Cliente borrado exitosamente"
