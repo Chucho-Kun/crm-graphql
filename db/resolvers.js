@@ -188,6 +188,7 @@ const resolvers = {
             }
         },
         nuevoProducto: async (_, {input}) => {
+            
             try {
                     const producto = new Producto( input )
 
