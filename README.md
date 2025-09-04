@@ -1,4 +1,4 @@
-# FullStack Platform GraphQL NEXT / REACT / TypeScript
+# FullStack Server GraphQL Javascript 100% 
 ## Server
 ## Technologies
 Node + Javascript + ApolloServer + Mongoose + Dotenv + Bcrypt + JsonWebToken
