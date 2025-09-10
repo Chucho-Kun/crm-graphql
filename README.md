@@ -10,6 +10,9 @@ Node + Javascript + ApolloServer + Mongoose + Dotenv + Bcrypt + JsonWebToken
 const { gql } = require("apollo-server");
 
 // Schema 
+const { gql } = require("apollo-server");
+
+// Schema 
 const typeDefs = gql`
   
     type Usuario{
@@ -55,6 +58,8 @@ const typeDefs = gql`
     type PedidoGrupo{
         id: ID
         cantidad: Int
+        nombre: String
+        precio: Float
     }
 
     type TopCliente{
@@ -96,6 +101,8 @@ const typeDefs = gql`
     input PedidoProductoInput{
         id: ID
         cantidad: Int
+        nombre: String
+        precio: Float
     }
 
     input PedidoInput{
@@ -113,7 +120,7 @@ const typeDefs = gql`
 
     type Query  {
         # Usuarios
-        obtenerUsuario( token : String!): Usuario
+        obtenerUsuario: Usuario
 
         # Productos
         obtenerProductos: [Producto]
