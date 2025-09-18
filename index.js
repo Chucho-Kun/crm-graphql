@@ -30,7 +30,7 @@ const server = new ApolloServer({
     }
 })
 
-server.listen().then((url) => {
+server.listen({ port: process.env.PORT || 4000 }).then((url) => {
     console.log(`Escuchando en la url: ${url.url}`);
     
 })
