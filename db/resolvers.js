@@ -97,20 +97,37 @@ const resolvers = {
         },
         mejoresClientes: async () => {
             const clientes = await Pedido.aggregate([
-                { $match : { estado : "COMPLETADO" }},
-                { $group : {
-                    _id: "$cliente",
-                    total: { $sum: '$total' }
-                }},
+                { $match: { estado: "COMPLETADO" } },
                 {
-                    $lookup:{
+                    $group: {
+                        _id: "$cliente",
+                        total: { $sum: '$total' }
+                    }
+                },
+                {
+                    $lookup: {
                         from: 'clientes',
                         localField: '_id',
                         foreignField: '_id',
                         as: 'cliente'
                     }
-                },{
-                    $sort: { total : -1 }
+                },
+                { $sort: { total: -1 } },
+                {
+                    $project: {
+                        total: 1,
+                        cliente: {
+                            $map: {
+                                input: "$cliente",
+                                as: "c",
+                                in: {
+                                    id: "$$c._id",
+                                    nombre: "$$c.nombre",
+                                    apellido: "$$c.apellido"
+                                }
+                            }
+                        }
+                    }
                 }
             ]);
 
@@ -133,9 +150,26 @@ const resolvers = {
                 },
                 {
                     $limit: 5
-                },{
-                    $sort: { total: -1 }
+                 },{ $sort: { total: -1 } },
+                 {
+                    $project: {
+                        total: 1,
+                        vendedor: {
+                            $map: {
+                                input: "$vendedor",
+                                as: "v",
+                                in: {
+                                    id: "$$v._id",
+                                    nombre: "$$v.nombre",
+                                    apellido: "$$v.apellido",
+                                    email: "$$v.email",
+                                    creado: "$$v.creado"
+                                }
+                            }
+                        }
+                    }
                 }
+
             ]);
 
             return vendedores;
