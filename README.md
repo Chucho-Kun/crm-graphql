@@ -1,6 +1,4 @@
 # FullStack Server GraphQL Javascript 100% 
-## Server
-
 ## 🚀 Tech Stack
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -9,8 +7,7 @@
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
 ![Dotenv](https://img.shields.io/badge/Dotenv-8DD6F9?style=for-the-badge&logoColor=black)
 ![Bcrypt](https://img.shields.io/badge/Bcrypt-1E90FF?style=for-the-badge&logoColor=white)
-
-
+<img width="1534" height="850" alt="Captura de Pantalla 2025-09-18 a la(s) 16 44 49" src="https://github.com/user-attachments/assets/8d9c984e-40f8-4f45-9c18-384a5d8c3bf5" />
 ## Developer Notes
 ### Basic db Mongo DB 
 ### config/db.js
